@@ -1,0 +1,129 @@
+[gd_scene load_steps=21 format=2]
+
+[ext_resource path="res://AnimatedSprite.tscn" type="PackedScene" id=1]
+[ext_resource path="res://player.gd" type="Script" id=2]
+[ext_resource path="res://New Piskel (2).png" type="Texture" id=3]
+[ext_resource path="res://New_Piskel_13.png" type="Texture" id=4]
+[ext_resource path="res://flower.png" type="Texture" id=5]
+[ext_resource path="res://character.png" type="Texture" id=6]
+[ext_resource path="res://clouds.png" type="Texture" id=7]
+[ext_resource path="res://character squat.png" type="Texture" id=8]
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 8 )
+region = Rect2( 0, 0, 512, 512 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 8 )
+region = Rect2( 0, 512, 512, 512 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 6 )
+region = Rect2( 0, 512, 512, 512 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 6 )
+region = Rect2( 0, 1024, 512, 512 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 6 )
+region = Rect2( 0, 1536, 512, 512 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 6 )
+region = Rect2( 0, 2048, 512, 512 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 6 )
+region = Rect2( 0, 2560, 512, 512 )
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 6 )
+region = Rect2( 0, 3072, 512, 512 )
+
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 6 )
+region = Rect2( 0, 3584, 512, 512 )
+
+[sub_resource type="AtlasTexture" id=10]
+atlas = ExtResource( 6 )
+region = Rect2( 0, 0, 512, 512 )
+
+[sub_resource type="SpriteFrames" id=11]
+animations = [ {
+"frames": [  ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 1 ), SubResource( 2 ) ],
+"loop": true,
+"name": "idle",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ) ],
+"loop": true,
+"name": "walk",
+"speed": 5.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=12]
+extents = Vector2( 91.3684, 244.897 )
+
+[node name="KinematicBody2D" type="KinematicBody2D"]
+scale = Vector2( 0.15, 0.15 )
+script = ExtResource( 2 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+zoom = Vector2( 0.4, 0.4 )
+smoothing_enabled = true
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="Camera2D"]
+scroll_ignore_camera_zoom = true
+
+[node name="mountains" type="ParallaxLayer" parent="Camera2D/ParallaxBackground"]
+motion_scale = Vector2( 0.4, 0.4 )
+
+[node name="mountatins" type="Sprite" parent="Camera2D/ParallaxBackground/mountains"]
+position = Vector2( 1813.4, -72.9532 )
+scale = Vector2( 4.18662, 2.22378 )
+texture = ExtResource( 3 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 4056, 512 )
+
+[node name="trees" type="ParallaxLayer" parent="Camera2D/ParallaxBackground"]
+motion_scale = Vector2( 0.7, 0.7 )
+
+[node name="trees" type="Sprite" parent="Camera2D/ParallaxBackground/trees"]
+position = Vector2( 1482.71, 39.8606 )
+texture = ExtResource( 4 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 4056, 512 )
+
+[node name="flower" type="ParallaxLayer" parent="Camera2D/ParallaxBackground"]
+
+[node name="flower" type="Sprite" parent="Camera2D/ParallaxBackground/flower"]
+position = Vector2( 1009.2, 139.962 )
+scale = Vector2( 0.79258, 0.520416 )
+texture = ExtResource( 5 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 4096, 512 )
+
+[node name="clouds" type="ParallaxLayer" parent="Camera2D/ParallaxBackground"]
+
+[node name="cloud" type="Sprite" parent="Camera2D/ParallaxBackground/clouds"]
+position = Vector2( 8178.81, 46.6409 )
+scale = Vector2( 1, 0.5 )
+texture = ExtResource( 7 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 4056, 512 )
+
+[node name="AnimatedSprite" parent="." instance=ExtResource( 1 )]
+position = Vector2( 68.8472, 57.4189 )
+frames = SubResource( 11 )
+animation = "idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( -10.6299, -7.73863 )
+shape = SubResource( 12 )
